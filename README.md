@@ -1,0 +1,1 @@
+An API for a clothes shop. Works in a docker container and uses Postgresql as a database. Just compose it up and it works. 

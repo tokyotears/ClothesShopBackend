@@ -1,0 +1,26 @@
+name: ClothesShop
+
+services:
+  api:
+    build:
+      context: .
+    image: clothesshopapi
+    ports:
+      - "8000:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: Pasha
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: ClothesShop
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U Pasha -d ClothesShop"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
